@@ -63,25 +63,34 @@
         android:layout_marginTop="20dp">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:id="@+id/image3sec"
             android:src="@drawable/trollo"/>
 
         <RadioButton
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:id="@+id/radioBtn1"
             android:text="ANS1"/>
 
         <RadioButton
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:id="@+id/radioBtn2"
             android:text="ANS2"/>
 
         <RadioButton
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:id="@+id/radioBtn3"
             android:text="ANS3"/>
+
+        <RadioButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioBtn4"
+            android:text="ANS4"/>
 
     </LinearLayout>
 

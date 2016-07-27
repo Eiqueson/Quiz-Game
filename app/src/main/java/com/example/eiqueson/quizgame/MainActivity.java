@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -100,9 +101,17 @@ public class MainActivity extends AppCompatActivity {
         topicDialog1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(getApplicationContext(), ThreeSecondsActivity.class);
-                intent.putExtra("Topic", topicSelected);
-                startActivity(intent);
+                if (topicSelected == "Minecraft")
+                {
+                    Toast toast = Toast.makeText(MainActivity.this, "This topic is not available", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else
+                {
+                    Intent intent = new Intent(getApplicationContext(), ThreeSecondsActivity.class);
+                    intent.putExtra("Topic", topicSelected);
+                    startActivity(intent);
+                }
             }
         });
         topicDialog1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
