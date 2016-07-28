@@ -28,6 +28,8 @@ public class ThreeSecondsActivity extends AppCompatActivity {
     CountDownTimer timer3;
     TextView timerText;
     TextView topicText;
+    TextView scoreText;
+    TextView fullScoreText;
     ProgressBar timerProgress;
     Button timerStart;
     ImageView quizImage;
@@ -35,6 +37,8 @@ public class ThreeSecondsActivity extends AppCompatActivity {
     RadioButton choice1, choice2, choice3, choice4;
 
     public static String topic;
+    static int fullScore;
+    int score;
 
     SQLiteDatabase mDatabase;
     Database mHelper;
@@ -47,6 +51,8 @@ public class ThreeSecondsActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         topic = bundle.getString("Topic");
+        fullScore = bundle.getInt("Fullscore");
+        score = 0;
 
         mHelper = new Database(this);
         mDatabase = mHelper.getWritableDatabase();
@@ -57,6 +63,9 @@ public class ThreeSecondsActivity extends AppCompatActivity {
         timerText.setVisibility(View.INVISIBLE);
         topicText = (TextView) findViewById(R.id.topic3sec);
         topicText.setText(topic);
+        scoreText = (TextView) findViewById(R.id.score3sec);
+        fullScoreText = (TextView) findViewById(R.id.fullscore3sec);
+        fullScoreText.setText(String.valueOf(fullScore));
 
         timerProgress = (ProgressBar) findViewById(R.id.pbTimer);
         timerProgress.setVisibility(View.INVISIBLE);
@@ -67,11 +76,7 @@ public class ThreeSecondsActivity extends AppCompatActivity {
         choice2 = (RadioButton) findViewById(R.id.radioBtn2);
         choice3 = (RadioButton) findViewById(R.id.radioBtn3);
         choice4 = (RadioButton) findViewById(R.id.radioBtn4);
-
-        choice1.setEnabled(false);
-        choice2.setEnabled(false);
-        choice3.setEnabled(false);
-        choice4.setEnabled(false);
+        enableRadioButton(false);
         /*
         mCursor = mDatabase.rawQuery("SELECT " + Database.COL_IMAGE + "," + Database.COL_CHOICE_1
 
@@ -90,10 +95,7 @@ public class ThreeSecondsActivity extends AppCompatActivity {
                 timerStart.setEnabled(false);
                 timerText.setVisibility(View.VISIBLE);
 
-                choice1.setEnabled(true);
-                choice2.setEnabled(true);
-                choice3.setEnabled(true);
-                choice4.setEnabled(true);
+                enableRadioButton(true);
 
                 if (mCursor.isAfterLast())
                 {
@@ -139,7 +141,7 @@ public class ThreeSecondsActivity extends AppCompatActivity {
                     case R.id.radioBtn1:
                         if (choice1.getText().toString().matches(ans))
                         {
-                            showCorrectDialog();
+                            showCorrectDialog(ans);
                         }
                         else
                         {
@@ -151,17 +153,14 @@ public class ThreeSecondsActivity extends AppCompatActivity {
                         timerText.setVisibility(View.INVISIBLE);
                         timerStart.setEnabled(true);
                         choice1.setChecked(false);
-                        choice1.setEnabled(false);
-                        choice2.setEnabled(false);
-                        choice3.setEnabled(false);
-                        choice4.setEnabled(false);
+                        enableRadioButton(false);
                         mCursor.moveToNext();
                         break;
 
                     case R.id.radioBtn2:
                         if (choice2.getText().toString().matches(ans))
                         {
-                            showCorrectDialog();
+                            showCorrectDialog(ans);
                         }
                         else
                         {
@@ -173,17 +172,14 @@ public class ThreeSecondsActivity extends AppCompatActivity {
                         timerText.setVisibility(View.INVISIBLE);
                         timerStart.setEnabled(true);
                         choice2.setChecked(false);
-                        choice1.setEnabled(false);
-                        choice2.setEnabled(false);
-                        choice3.setEnabled(false);
-                        choice4.setEnabled(false);
+                        enableRadioButton(false);
                         mCursor.moveToNext();
                         break;
 
                     case R.id.radioBtn3:
                         if (choice3.getText().toString().matches(ans))
                         {
-                            showCorrectDialog();
+                            showCorrectDialog(ans);
                         }
                         else
                         {
@@ -195,17 +191,14 @@ public class ThreeSecondsActivity extends AppCompatActivity {
                         timerText.setVisibility(View.INVISIBLE);
                         timerStart.setEnabled(true);
                         choice3.setChecked(false);
-                        choice1.setEnabled(false);
-                        choice2.setEnabled(false);
-                        choice3.setEnabled(false);
-                        choice4.setEnabled(false);
+                        enableRadioButton(false);
                         mCursor.moveToNext();
                         break;
 
                     case R.id.radioBtn4:
                         if (choice4.getText().toString().matches(ans))
                         {
-                            showCorrectDialog();
+                            showCorrectDialog(ans);
                         }
                         else
                         {
@@ -217,10 +210,7 @@ public class ThreeSecondsActivity extends AppCompatActivity {
                         timerText.setVisibility(View.INVISIBLE);
                         timerStart.setEnabled(true);
                         choice4.setChecked(false);
-                        choice1.setEnabled(false);
-                        choice2.setEnabled(false);
-                        choice3.setEnabled(false);
-                        choice4.setEnabled(false);
+                        enableRadioButton(false);
                         mCursor.moveToNext();
                         break;
                 }
@@ -260,11 +250,11 @@ public class ThreeSecondsActivity extends AppCompatActivity {
         timeoutDialog.show();
     }
 
-    public void showCorrectDialog()
+    public void showCorrectDialog(String ans)
     {
         AlertDialog.Builder timeoutDialog = new AlertDialog.Builder(this);
         timeoutDialog.setTitle("Congrats !");
-        timeoutDialog.setMessage("Correct !!");
+        timeoutDialog.setMessage("Correct !! This is [" + ans + "]");
         timeoutDialog.setIcon(R.drawable.trollo);
         timeoutDialog.setCancelable(false);
         timeoutDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -274,6 +264,16 @@ public class ThreeSecondsActivity extends AppCompatActivity {
             }
         });
         timeoutDialog.show();
+        score++;
+        scoreText.setText(String.valueOf(score));
+    }
+
+    public void enableRadioButton(boolean toggle)
+    {
+        choice1.setEnabled(toggle);
+        choice2.setEnabled(toggle);
+        choice3.setEnabled(toggle);
+        choice4.setEnabled(toggle);
     }
 
     @Override

@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     String[] topic3sec = {"Animal", "Fruit", "Minecraft"};
     String topicSelected;
+    int[] fullScoreSet = {8,3,3};
+    int fullScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,20 +90,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void showTopicList()
     {
-        topicSelected = topic3sec[0];
+        //topicSelected = topic3sec[0];
         AlertDialog.Builder topicDialog1 = new AlertDialog.Builder(this);
         topicDialog1.setTitle("Select Topic");
-        topicDialog1.setSingleChoiceItems(topic3sec, 0, new DialogInterface.OnClickListener() {
+        topicDialog1.setSingleChoiceItems(topic3sec, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 topicSelected = topic3sec[i];
+                fullScore = fullScoreSet[i];
             }
         });
 
         topicDialog1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (topicSelected == "Minecraft")
+                if (topicSelected == null)
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please select a topic first", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else if (topicSelected == "Minecraft")
                 {
                     Toast toast = Toast.makeText(getApplicationContext(), "This topic is not available", Toast.LENGTH_LONG);
                     toast.show();
@@ -110,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Intent intent = new Intent(getApplicationContext(), ThreeSecondsActivity.class);
                     intent.putExtra("Topic", topicSelected);
+                    intent.putExtra("Fullscore", fullScore);
                     startActivity(intent);
                 }
             }

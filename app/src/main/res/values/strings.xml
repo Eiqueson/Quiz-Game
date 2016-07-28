@@ -4,5 +4,5 @@
     <string name="btn_mode1">3 Seconds</string>
     <string name="btn_mode2">Q and A</string>
     <string name="text_score3sec">0</string>
-    <string name="text_fullscore3sec">3</string>
+    <string name="text_fullscore3sec">4</string>
 </resources>
