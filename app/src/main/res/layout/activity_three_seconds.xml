@@ -29,6 +29,37 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scoreLayout"
+        android:orientation="horizontal"
+        android:layout_below="@id/topicLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Score : "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/score3sec"
+            android:text="@string/text_score3sec"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" / "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fullscore3sec"
+            android:text="@string/text_fullscore3sec"/>
+
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +90,7 @@
         android:id="@+id/quizBodyLayout"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_below="@+id/topicLayout"
+        android:layout_below="@+id/scoreLayout"
         android:layout_marginTop="20dp">
 
         <ImageView
@@ -68,29 +99,38 @@
             android:id="@+id/image3sec"
             android:src="@drawable/trollo"/>
 
-        <RadioButton
+        <RadioGroup
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/radioBtn1"
-            android:text="ANS1"/>
+            android:id="@+id/radioGroup1">
 
-        <RadioButton
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioBtn2"
-            android:text="ANS2"/>
+            <RadioButton
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioBtn1"
+                android:text="ANS1"/>
 
-        <RadioButton
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioBtn3"
-            android:text="ANS3"/>
+            <RadioButton
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioBtn2"
+                android:text="ANS2"/>
 
-        <RadioButton
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioBtn4"
-            android:text="ANS4"/>
+            <RadioButton
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioBtn3"
+                android:text="ANS3"/>
+
+            <RadioButton
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioBtn4"
+                android:text="ANS4"/>
+
+        </RadioGroup>
+
+
 
     </LinearLayout>
 

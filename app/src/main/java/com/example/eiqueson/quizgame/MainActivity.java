@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (topicSelected == "Minecraft")
                 {
-                    Toast toast = Toast.makeText(MainActivity.this, "This topic is not available", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getApplicationContext(), "This topic is not available", Toast.LENGTH_LONG);
                     toast.show();
                 }
                 else
