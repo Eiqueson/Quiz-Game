@@ -9,16 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     Button btn3sec;
     Button btnQA;
 
     String[] topic3sec = {"Animal", "Fruit", "Minecraft"};
+    String[] topicSpec = {"Animal", "Minecraft"};
     String topicSelected;
-    int[] fullScoreSet = {8,3,3};
+    int[] fullScoreSet3sec = {8,3,3};
+    int[] fullScoreSetSpec = {25, 50};
     int fullScore;
 
     @Override
@@ -32,13 +32,13 @@ public class MainActivity extends AppCompatActivity {
         btn3sec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTopicList();
+                showTopic3secList();
             }
         });
         btnQA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getErrorDialog();
+                showTopicSpecList();
             }
         });
     }
@@ -82,13 +82,13 @@ public class MainActivity extends AppCompatActivity {
         errorDialog.show();
     }
 
-    public void goTo3seconds()
+    public void goToSpec()
     {
-        Intent intent = new Intent(getApplicationContext(), ThreeSecondsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SpecificationActivity.class);
         startActivity(intent);
     }
 
-    public void showTopicList()
+    public void showTopic3secList()
     {
         //topicSelected = topic3sec[0];
         AlertDialog.Builder topicDialog1 = new AlertDialog.Builder(this);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 topicSelected = topic3sec[i];
-                fullScore = fullScoreSet[i];
+                fullScore = fullScoreSet3sec[i];
             }
         });
 
@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 else if (topicSelected == "Minecraft")
                 {
                     Toast toast = Toast.makeText(getApplicationContext(), "This topic is not available", Toast.LENGTH_LONG);
+                    topicSelected = null;
                     toast.show();
                 }
                 else
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ThreeSecondsActivity.class);
                     intent.putExtra("Topic", topicSelected);
                     intent.putExtra("Fullscore", fullScore);
+                    topicSelected = null;
                     startActivity(intent);
                 }
             }
@@ -126,9 +128,57 @@ public class MainActivity extends AppCompatActivity {
         topicDialog1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                topicSelected = null;
                 dialogInterface.cancel();
             }
         });
         topicDialog1.show();
+    }
+
+    public void showTopicSpecList()
+    {
+        //topicSelected = topic3sec[0];
+        AlertDialog.Builder topicDialog2 = new AlertDialog.Builder(this);
+        topicDialog2.setTitle("Select Topic");
+        topicDialog2.setSingleChoiceItems(topicSpec, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                topicSelected = topicSpec[i];
+                fullScore = fullScoreSetSpec[i];
+            }
+        });
+
+        topicDialog2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (topicSelected == null)
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please select a topic first", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else if (topicSelected == "Minecraft")
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(), "This topic is not available", Toast.LENGTH_LONG);
+                    topicSelected = null;
+                    toast.show();
+                }
+                else
+                {
+                    Intent intent = new Intent(getApplicationContext(), SpecificationActivity.class);
+                    intent.putExtra("Topic", topicSelected);
+                    intent.putExtra("Fullscore", fullScore);
+                    topicSelected = null;
+                    startActivity(intent);
+                }
+            }
+        });
+        topicDialog2.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                topicSelected = null;
+                dialogInterface.cancel();
+            }
+        });
+        topicDialog2.show();
     }
 }

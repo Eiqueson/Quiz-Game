@@ -1,14 +1,9 @@
 package com.example.eiqueson.quizgame;
 
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.CountDownTimer;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,8 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import java.io.File;
 
 public class ThreeSecondsActivity extends AppCompatActivity {
 
@@ -236,34 +229,34 @@ public class ThreeSecondsActivity extends AppCompatActivity {
 
     public void showWrongDialog()
     {
-        AlertDialog.Builder timeoutDialog = new AlertDialog.Builder(this);
-        timeoutDialog.setTitle("Fail");
-        timeoutDialog.setMessage("Wrong !!");
-        timeoutDialog.setIcon(R.drawable.trollo);
-        timeoutDialog.setCancelable(false);
-        timeoutDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder wrongDialog = new AlertDialog.Builder(this);
+        wrongDialog.setTitle("Fail");
+        wrongDialog.setMessage("Wrong !!");
+        wrongDialog.setIcon(R.drawable.trollo);
+        wrongDialog.setCancelable(false);
+        wrongDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
             }
         });
-        timeoutDialog.show();
+        wrongDialog.show();
     }
 
     public void showCorrectDialog(String ans)
     {
-        AlertDialog.Builder timeoutDialog = new AlertDialog.Builder(this);
-        timeoutDialog.setTitle("Congrats !");
-        timeoutDialog.setMessage("Correct !! This is [" + ans + "]");
-        timeoutDialog.setIcon(R.drawable.trollo);
-        timeoutDialog.setCancelable(false);
-        timeoutDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder correctDialog = new AlertDialog.Builder(this);
+        correctDialog.setTitle("Congrats !");
+        correctDialog.setMessage("Correct !! This is [" + ans + "]");
+        correctDialog.setIcon(R.drawable.trollo);
+        correctDialog.setCancelable(false);
+        correctDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
             }
         });
-        timeoutDialog.show();
+        correctDialog.show();
         score++;
         scoreText.setText(String.valueOf(score));
     }

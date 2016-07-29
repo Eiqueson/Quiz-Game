@@ -9,25 +9,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Created by eiqueson on 7/26/2016.
+ * Created by eiqueson on 7/29/2016.
  */
-public class Database extends SQLiteOpenHelper
-{
+public class SpecificationDatabase extends SQLiteOpenHelper{
 
-    private static final String DB_NAME = "Three Seconds Data";
+    private static final String DB_NAME = "Specification Data";
     private static final int DB_VERSION = 1;
 
-    public static final String TABLE_NAME = "threeseconds";
-    public static final String COL_IMAGE = "image";
-    public static final String COL_CHOICE_1 = "choice1";
-    public static final String COL_CHOICE_2 = "choice2";
-    public static final String COL_CHOICE_3 = "choice3";
-    public static final String COL_CHOICE_4 = "choice4";
+    public static final String TABLE_NAME = "Specification";
+    public static final String COL_SPEC_1 = "spec1";
+    public static final String COL_SPEC_2 = "spec2";
+    public static final String COL_SPEC_3 = "spec3";
+    public static final String COL_SPEC_4 = "spec4";
+    public static final String COL_SPEC_5 = "spec5";
     public static final String COL_ANSWER = "answer";
 
     Context ctx;
 
-    public Database(Context context) {
+    public SpecificationDatabase(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         ctx = context;
     }
@@ -35,12 +34,12 @@ public class Database extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String dbName = ThreeSecondsActivity.topic.toLowerCase()+"DB.csv";
+        String dbName = SpecificationActivity.topic.toLowerCase()+"SpecDB.csv";
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME
-                                + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                + COL_IMAGE + " TEXT, " + COL_CHOICE_1 + " TEXT, "
-                                + COL_CHOICE_2 + " TEXT, " + COL_CHOICE_3 + " TEXT, "
-                                + COL_CHOICE_4 + " TEXT, " + COL_ANSWER + " TEXT);");
+                + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COL_SPEC_1 + " TEXT, " + COL_SPEC_2 + " TEXT, "
+                + COL_SPEC_3 + " TEXT, " + COL_SPEC_4 + " TEXT, "
+                + COL_SPEC_5 + " TEXT, " + COL_ANSWER + " TEXT);");
 
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(ctx.getAssets().open(dbName)));
@@ -52,12 +51,12 @@ public class Database extends SQLiteOpenHelper
                 {
                     String[] str = readLine.split(",");
                     sqLiteDatabase.execSQL("INSERT INTO " + TABLE_NAME
-                                            + " (" + COL_IMAGE + ", " + COL_CHOICE_1
-                                            + ", " + COL_CHOICE_2 + ", " + COL_CHOICE_3
-                                            + ", " + COL_CHOICE_4 + ", " + COL_ANSWER
-                                            + ") VALUES ('" + str[0] + "', '" + str[1]
-                                            + "', '" + str[2] + "', '" + str[3]
-                                            + "', '" + str[4] + "', '" + str[5] + "');");
+                            + " (" + COL_SPEC_1 + ", " + COL_SPEC_2
+                            + ", " + COL_SPEC_3 + ", " + COL_SPEC_4
+                            + ", " + COL_SPEC_5 + ", " + COL_ANSWER
+                            + ") VALUES ('" + str[0] + "', '" + str[1]
+                            + "', '" + str[2] + "', '" + str[3]
+                            + "', '" + str[4] + "', '" + str[5] + "');");
                 }
             }
             catch (IOException e)
